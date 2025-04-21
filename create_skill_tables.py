@@ -4,11 +4,6 @@ conn = sqlite3.connect("infinity_game.db")
 cursor = conn.cursor()
 
 cursor.executescript("""
-CREATE TABLE IF NOT EXISTS skills (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT UNIQUE NOT NULL
-);
-
 CREATE TABLE IF NOT EXISTS skill_dependencies (
     skill_id INTEGER NOT NULL,
     depends_on_id INTEGER NOT NULL,
@@ -76,7 +71,15 @@ CREATE TABLE IF NOT EXISTS presence_skills (
     name TEXT UNIQUE NOT NULL,
     description TEXT
 );
-                    
+
+CREATE TABLE IF NOT EXISTS character_skills (
+    character_id INTEGER NOT NULL,
+    skill_table TEXT NOT NULL,
+    skill_id INTEGER NOT NULL,
+    current_value INTEGER DEFAULT 0,
+    FOREIGN KEY (character_id) REFERENCES characters(id),
+    PRIMARY KEY (character_id, skill_table, skill_id)
+);
 """)
 
 conn.commit()
