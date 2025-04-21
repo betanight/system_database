@@ -54,3 +54,39 @@ def create_character(name):
 
     conn.commit()
     conn.close()
+
+def view_character(name):
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT id FROM characters WHERE name = ?", (name,))
+    result = cursor.fetchone()
+    if not result:
+        print(f"Character '{name}' not found.")
+        conn.close()
+        return
+
+    character_id = result[0]
+    print(f"\n{name}'s Stats")
+
+    cursor.execute("""
+        SELECT primary_scores.name, character_primary_stats.current_value
+        FROM character_primary_stats
+        JOIN primary_scores ON character_primary_stats.score_id = primary_scores.id
+        WHERE character_primary_stats.character_id = ?
+    """, (character_id,))
+    print("\nPrimary Scores:")
+    for stat, value in cursor.fetchall():
+        print(f"{stat}: {value}")
+
+    cursor.execute("""
+        SELECT secondary_scores.name, character_secondary_stats.current_value
+        FROM character_secondary_stats
+        JOIN secondary_scores ON character_secondary_stats.score_id = secondary_scores.id
+        WHERE character_secondary_stats.character_id = ?
+    """, (character_id,))
+    print("\nSecondary Scores:")
+    for stat, value in cursor.fetchall():
+        print(f"{stat}: {value}")
+
+    conn.close()
