@@ -78,16 +78,16 @@ CREATE TABLE IF NOT EXISTS character_skills (
 );
 
 INSERT OR IGNORE INTO character_skills (skill_table) VALUES
-('strength Skills'),
-('dexterity Skills'),
-('constitution Skills'),
-('intelligence Skills'),
-('wisdom Skills'),
-('charisma Skills'),
-('willpower Skills'),
-('spirit Skills'),
-('instinct Skills'),
-('presence Skills');
+('Strength Skills'),
+('Dexterity Skills'),
+('Constitution Skills'),
+('Intelligence Skills'),
+('Wisdom Skills'),
+('Charisma Skills'),
+('Willpower Skills'),
+('Spirit Skills'),
+('Instinct Skills'),
+('Presence Skills');
 """)
 
 conn.commit()
