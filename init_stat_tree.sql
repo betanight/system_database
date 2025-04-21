@@ -36,19 +36,3 @@ CREATE TABLE IF NOT EXISTS character_secondary_stats (
     FOREIGN KEY (score_id) REFERENCES secondary_scores(id),
     PRIMARY KEY (character_id, score_id)
 );
-
--- Skills Table
-CREATE TABLE IF NOT EXISTS skills (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT UNIQUE NOT NULL
-);
-
--- Skill Dependencies Table
-CREATE TABLE IF NOT EXISTS skill_dependencies (
-    skill_id INTEGER NOT NULL,
-    depends_on_id INTEGER NOT NULL,
-    FOREIGN KEY (skill_id) REFERENCES skills(id),
-    FOREIGN KEY (depends_on_id) REFERENCES skills(id),
-    PRIMARY KEY (skill_id, depends_on_id)
-);
-
