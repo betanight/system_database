@@ -1,4 +1,5 @@
 import sqlite3
+from character_functions import create_character
 
 DB_PATH = "infinity_game.db"
 
@@ -39,5 +40,33 @@ def list_all_characters():
 
     conn.close()
 
+def main():
+    while True:
+        print("\nMenu:")
+        print("1. Create new character")
+        print("2. View all characters")
+        print("3. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            name = input("Enter character name: ")
+            conn = sqlite3.connect(DB_PATH)
+            cursor = conn.cursor()
+            cursor.execute("SELECT 1 FROM characters WHERE name = ?", (name,))
+            if cursor.fetchone():
+                print(f"Character '{name}' already exists.")
+            else:
+                create_character(name)
+                print(f"Character '{name}' created.")
+            conn.close()
+        elif choice == "2":
+            list_all_characters()
+        elif choice == "3":
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice. Try again.")
+
 if __name__ == "__main__":
-    list_all_characters()
+    main()
