@@ -1,5 +1,5 @@
 import sqlite3
-from character_functions import create_character
+from system_database.db_setup.character_functions import create_character
 
 DB_PATH = "infinity_game.db"
 
