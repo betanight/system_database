@@ -73,13 +73,21 @@ CREATE TABLE IF NOT EXISTS presence_skills (
 );
 
 CREATE TABLE IF NOT EXISTS character_skills (
-    character_id INTEGER NOT NULL,
-    skill_table TEXT NOT NULL,
-    skill_id INTEGER NOT NULL,
-    current_value INTEGER DEFAULT 0,
-    FOREIGN KEY (character_id) REFERENCES characters(id),
-    PRIMARY KEY (character_id, skill_table, skill_id)
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    skill_table TEXT UNIQUE NOT NULL
 );
+
+INSERT OR IGNORE INTO character_skills (skill_table) VALUES
+('strength_skills'),
+('dexterity_skills'),
+('constitution_skills'),
+('intelligence_skills'),
+('wisdom_skills'),
+('charisma_skills'),
+('willpower_skills'),
+('spirit_skills'),
+('instinct_skills'),
+('presence_skills');
 """)
 
 conn.commit()
