@@ -1,6 +1,6 @@
 import sqlite3
 
-def insert_charisma_skills():
+def insert_charisma_skills(db_filename):
     conn = sqlite3.connect(db_filename)
     cursor = conn.cursor()
 
