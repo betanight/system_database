@@ -8,4 +8,8 @@ def create_tables():
     conn.close()
 
 if __name__ == "__main__":
-    create_tables()
+    import sys
+    if len(sys.argv) < 2:
+        print("Usage: python3 setup_database.py [db_filename]")
+    else:
+        create_tables(sys.argv[1])
