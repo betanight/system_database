@@ -1,6 +1,6 @@
 import sqlite3
 
-def insert_primary_scores():
+def insert_primary_scores(db_filename):
     conn = sqlite3.connect(db_filename)
     cursor = conn.cursor()
 
@@ -17,7 +17,7 @@ def insert_primary_scores():
     conn.commit()
     conn.close()
 
-def insert_secondary_scores():
+def insert_secondary_scores(db_filename):
     conn = sqlite3.connect(db_filename)
     cursor = conn.cursor()
 
@@ -33,5 +33,5 @@ def insert_secondary_scores():
     conn.close()
 
 if __name__ == "__main__":
-    insert_primary_scores()
-    insert_secondary_scores()
+    insert_primary_scores("infinity_game.db")
+    insert_secondary_scores("infinity_game.db")

@@ -1,6 +1,6 @@
 import sqlite3
 
-def create_skill_tables():
+def create_skill_tables(db_filename):
     conn = sqlite3.connect(db_filename)
     cursor = conn.cursor()
 
@@ -95,4 +95,4 @@ def create_skill_tables():
     conn.close()
 
 if __name__ == "__main__":
-    create_skill_tables()
+    create_skill_tables("infinity_game.db")

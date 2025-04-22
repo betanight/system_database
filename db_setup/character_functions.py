@@ -1,7 +1,5 @@
 import sqlite3
 
-DB_PATH = "infinity_game.db"
-
 class Character:
     def __init__(self, name):
         self.name = name
@@ -35,8 +33,8 @@ class Character:
             return getattr(self, stat_name)
         return None
 
-def create_character(name):
-    conn = sqlite3.connect(DB_PATH)
+def create_character(name, db_filename):
+    conn = sqlite3.connect(db_filename)
     cursor = conn.cursor()
 
     cursor.execute("INSERT INTO characters (name, level) VALUES (?, ?)", (name, 0))
@@ -45,18 +43,24 @@ def create_character(name):
     cursor.execute("SELECT id FROM primary_scores")
     primary_ids = [row[0] for row in cursor.fetchall()]
     for score_id in primary_ids:
-        cursor.execute("INSERT INTO character_primary_stats (character_id, score_id, current_value) VALUES (?, ?, ?)", (character_id, score_id, 1))
+        cursor.execute(
+            "INSERT INTO character_primary_stats (character_id, score_id, current_value) VALUES (?, ?, ?)",
+            (character_id, score_id, 1)
+        )
 
     cursor.execute("SELECT id FROM secondary_scores")
     secondary_ids = [row[0] for row in cursor.fetchall()]
     for score_id in secondary_ids:
-        cursor.execute("INSERT INTO character_secondary_stats (character_id, score_id, current_value) VALUES (?, ?, ?)", (character_id, score_id, 0))
+        cursor.execute(
+            "INSERT INTO character_secondary_stats (character_id, score_id, current_value) VALUES (?, ?, ?)",
+            (character_id, score_id, 0)
+        )
 
     conn.commit()
     conn.close()
 
-def view_character(name):
-    conn = sqlite3.connect(DB_PATH)
+def view_character(name, db_filename):
+    conn = sqlite3.connect(db_filename)
     cursor = conn.cursor()
 
     cursor.execute("SELECT id FROM characters WHERE name = ?", (name,))
