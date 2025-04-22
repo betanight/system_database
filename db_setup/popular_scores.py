@@ -1,7 +1,7 @@
 import sqlite3
 
 def insert_primary_scores():
-    conn = sqlite3.connect("infinity_game.db")
+    conn = sqlite3.connect(db_filename)
     cursor = conn.cursor()
 
     primary_stats = [
@@ -18,7 +18,7 @@ def insert_primary_scores():
     conn.close()
 
 def insert_secondary_scores():
-    conn = sqlite3.connect("infinity_game.db")
+    conn = sqlite3.connect(db_filename)
     cursor = conn.cursor()
 
     secondary_stats = [

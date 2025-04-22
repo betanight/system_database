@@ -3,9 +3,8 @@ import pandas as pd
 import networkx as nx
 import matplotlib.pyplot as plt
 
-# Use the uploaded database file
-db_path = "/Users/betaknight/infinity_game/infinity_game.db"
-conn = sqlite3.connect(db_path)
+
+conn = sqlite3.connect(db_filename)
 
 # Query to fetch character to primary stat relationships
 df = pd.read_sql_query("""

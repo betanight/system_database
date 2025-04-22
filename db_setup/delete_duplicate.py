@@ -1,6 +1,6 @@
 import sqlite3
 
-conn = sqlite3.connect("infinity_game.db")
+conn = sqlite3.connect(db_filename)
 cursor = conn.cursor()
 
 # REMOVE duplicate characters, keep first occurrence by name

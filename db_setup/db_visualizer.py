@@ -1,10 +1,8 @@
 import sqlite3
 from system_database.db_setup.character_functions import create_character
 
-DB_PATH = "infinity_game.db"
-
 def list_all_characters():
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(db_filename)
     cursor = conn.cursor()
 
     cursor.execute("SELECT id, name, level FROM characters GROUP BY name")

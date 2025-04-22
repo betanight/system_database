@@ -1,7 +1,7 @@
 import sqlite3
 
 def insert_instinct_skills():
-    conn = sqlite3.connect("infinity_game.db")
+    conn = sqlite3.connect(db_filename)
     cursor = conn.cursor()
 
         # Add column if it doesn't exist
