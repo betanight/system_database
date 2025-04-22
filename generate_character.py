@@ -26,6 +26,12 @@ from system_database.skills.willpower import insert_willpower_skills
 from system_database.skills.wisdom import insert_wisdom_skills
 
 def generate_character_db(character_name):
+    first_name = character_name.split()[0].lower()
+    db_filename = f"{first_name}_infinity.db"
+
+    conn = sqlite3.connect(db_filename)
+    cursor = conn.cursor()
+
     create_tables()
     insert_primary_scores()
     insert_secondary_scores()
@@ -42,15 +48,14 @@ def generate_character_db(character_name):
     insert_willpower_skills()
     insert_wisdom_skills()
 
-    # Avoid duplicates
-    conn = sqlite3.connect("infinity_game.db")
-    cursor = conn.cursor()
     cursor.execute("SELECT 1 FROM characters WHERE name = ?", (character_name,))
     if cursor.fetchone():
         print(f"Character '{character_name}' already exists. Skipping creation.")
     else:
         create_character(character_name)
         print(f"You have created a new character at level 0! Welcome, {character_name}.")
+
+    conn.commit()
     conn.close()
 
 if __name__ == "__main__":
