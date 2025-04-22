@@ -4,6 +4,12 @@ def insert_dexterity_skills():
     conn = sqlite3.connect("infinity_game.db")
     cursor = conn.cursor()
 
+        # Add column if it doesn't exist
+    try:
+        cursor.execute("ALTER TABLE dexterity_skills ADD COLUMN effective_value INTEGER DEFAULT 0")
+    except sqlite3.OperationalError:
+        pass  # Column already exists
+    
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS dexterity_skills (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
