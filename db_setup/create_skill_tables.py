@@ -1,7 +1,7 @@
 import sqlite3
 
 def create_skill_tables():
-    conn = sqlite3.connect("infinity_game.db")
+    conn = sqlite3.connect(db_filename)
     cursor = conn.cursor()
 
     cursor.executescript("""
